@@ -5,5 +5,6 @@ Goal of this project is practice and learn React, React Router, Testing Library 
 
 ### What have I added
 
+- using react router v6
 - Tests, unit and integration.
 - Custom styling.

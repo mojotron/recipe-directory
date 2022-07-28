@@ -6,6 +6,9 @@ html {
   font-size: 10px;
 }
 :root {
+  --blue: #1d3c45;
+  --brown: #d2601a;
+  --white: #fff1e1;
 }
 *,
 *::after,
@@ -16,5 +19,16 @@ html {
 }
 body {
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
+  background-color: var(--blue);
+}
+#root {
+  background-color: var(--white);
+  height: inherit;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
 }

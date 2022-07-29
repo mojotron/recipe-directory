@@ -23,7 +23,6 @@ const useFetch = (url) => {
         } else {
           setIsPending(false);
           setError("Could not fetch data!");
-          console.error(error);
         }
       }
     };

@@ -14,15 +14,15 @@ const Recipe = () => {
       {error && <p>{error}</p>}
       {data && (
         <>
-          <h3>{data.title}</h3>
+          <h2>{data.title}</h2>
           <p>Cooking time {data.cookingTime}</p>
-          <p>Ingredients</p>
+          <h3>Ingredients:</h3>
           <ul>
             {data.ingredients.map((ing) => (
               <li key={ing}>{ing}</li>
             ))}
           </ul>
-          <p>Method:</p>
+          <h3>Method:</h3>
           <p>{data.method}</p>
         </>
       )}

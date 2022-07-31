@@ -5,11 +5,6 @@
   align-items: center;
   border-bottom: 0.1rem solid #ccc;
 }
-.Navbar a {
-  font-family: inherit;
-  font-size: 1.3rem;
-  color: var(--brown);
-}
 .Navbar a.active {
   text-decoration: none;
   opacity: 0.5;

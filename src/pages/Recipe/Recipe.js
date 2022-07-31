@@ -9,20 +9,20 @@ const Recipe = () => {
   );
 
   return (
-    <div>
+    <div className="Recipe">
       {isPending && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {data && (
         <>
-          <h2>{data.title}</h2>
-          <p>Cooking time {data.cookingTime}</p>
-          <h3>Ingredients:</h3>
-          <ul>
+          <h2 className="Recipe__heading">{data.title}</h2>
+          <p className="Recipe__time">Cooking time {data.cookingTime}</p>
+          <h3 className="Recipe__subheading">Ingredients:</h3>
+          <ul className="Recipe__ingredients">
             {data.ingredients.map((ing) => (
               <li key={ing}>{ing}</li>
             ))}
           </ul>
-          <h3>Method:</h3>
+          <h3 className="Recipe__subheading">Method:</h3>
           <p>{data.method}</p>
         </>
       )}

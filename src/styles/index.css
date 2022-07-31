@@ -22,6 +22,15 @@ body {
   width: 100vw;
   background-color: var(--blue);
 }
+a {
+  font-family: inherit;
+  font-size: 1.3rem;
+  color: var(--brown);
+  opacity: 0.75;
+}
+a:hover {
+  opacity: 1;
+}
 #root {
   background-color: var(--white);
   height: inherit;
@@ -31,4 +40,43 @@ body {
   justify-content: flex-start;
   align-items: center;
   margin: 0 auto;
+}
+
+.btn {
+  background-color: var(--white);
+  border-radius: 0.3rem;
+  border: 1px solid var(--blue);
+  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+  color: var(--blue);
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.15385;
+  outline: none;
+  padding: 0.8rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 4px var(--white);
+}
+
+.btn:active {
+  background-color: var(--brown);
+  box-shadow: none;
 }

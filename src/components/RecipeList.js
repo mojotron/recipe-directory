@@ -3,10 +3,10 @@ import "./styles/RecipeList.css";
 
 const RecipeList = ({ recipes }) => {
   return (
-    <div>
+    <div className="RecipeList">
       {recipes.map((recipe) => (
-        <div key={recipe.id}>
-          <h3>{recipe.title}</h3>
+        <div className="RecipeList__item" key={recipe.id}>
+          <h3 className="RecipeList__item__heading">{recipe.title}</h3>
           <Link to={`/recipes/${recipe.id}`}>Cook this</Link>
         </div>
       ))}

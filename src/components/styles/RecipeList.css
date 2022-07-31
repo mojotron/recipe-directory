@@ -1,0 +1,19 @@
+.RecipeList {
+}
+.RecipeList__item {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 0.3rem;
+  width: 30rem;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.RecipeList__item__heading {
+  font-family: "Cookie", "Poppins", sans-serif;
+  font-size: 2.5rem;
+  color: var(--brown);
+  letter-spacing: 0.1rem;
+}

@@ -49,7 +49,7 @@ describe("CreateRecipe page", () => {
   test("render ingredients", () => {
     render(<CreateRecipe />);
     const ingInput = screen.getByLabelText("Ingredients");
-    const addIngBtn = screen.getByRole("button", { name: "Add Ingredient" });
+    const addIngBtn = screen.getByRole("button", { name: "Add" });
     const ingList = screen.getByRole("list");
     expect(ingInput).toBeInTheDocument();
     expect(addIngBtn).toBeInTheDocument();

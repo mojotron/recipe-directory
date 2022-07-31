@@ -1,0 +1,49 @@
+.CreateRecipe {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5rem 10rem;
+  max-width: 65rem;
+}
+.CreateRecipe__heading {
+  font-family: "Cookie", "Poppins", sans-serif;
+  text-align: center;
+  color: var(--brown);
+  font-size: 2.5rem;
+  padding-bottom: 3rem;
+}
+.CreateRecipe__form {
+  display: flex;
+  flex-direction: column;
+}
+.CreateRecipe__form label {
+  color: var(--blue);
+  font-size: 1.6rem;
+}
+.CreateRecipe__form input,
+.CreateRecipe__form textarea {
+  margin-bottom: 1rem;
+  padding: 0.5rem 2rem;
+  font-family: inherit;
+  color: var(--blue);
+}
+.Form__add__ingredients {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+.Form__list__ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding-bottom: 1rem;
+}
+.Form__list__ingredients li {
+  padding: 0.5rem 1rem;
+  color: var(--blue);
+  font-size: 1.6rem;
+  font-family: "Poppins", sans-serif;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

@@ -39,9 +39,13 @@ const CreateRecipe = () => {
   };
 
   return (
-    <div>
-      <h2>Create New Recipe</h2>
-      <form aria-label="form" onSubmit={handleSubmit}>
+    <div className="CreateRecipe">
+      <h2 className="CreateRecipe__heading">Create New Recipe</h2>
+      <form
+        className="CreateRecipe__form"
+        aria-label="form"
+        onSubmit={handleSubmit}
+      >
         <label htmlFor="title">Title</label>
         <input
           id="title"
@@ -62,19 +66,21 @@ const CreateRecipe = () => {
           required
         />
 
-        <div>
-          <label htmlFor="ingredients">Ingredients</label>
-          <input
-            id="ingredients"
-            type="text"
-            value={currentIngredient}
-            onChange={handleIngChange}
-            ref={ingredientInput}
-          />
-          <button type="button" onClick={handleAddIng}>
-            Add Ingredient
-          </button>
-          <ul>
+        <div className="CreateRecipe__form__ingredients">
+          <div className="Form__add__ingredients">
+            <label htmlFor="ingredients">Ingredients</label>
+            <input
+              id="ingredients"
+              type="text"
+              value={currentIngredient}
+              onChange={handleIngChange}
+              ref={ingredientInput}
+            />
+            <button className="btn" type="button" onClick={handleAddIng}>
+              Add
+            </button>
+          </div>
+          <ul className="Form__list__ingredients">
             {ingredients.map((ing) => (
               <li key={ing}>{ing}</li>
             ))}
@@ -91,7 +97,9 @@ const CreateRecipe = () => {
           spellCheck
         />
 
-        <button type="submit">Create</button>
+        <button className="btn" type="submit">
+          Create
+        </button>
       </form>
     </div>
   );

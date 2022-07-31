@@ -1,0 +1,31 @@
+.Recipe {
+  padding: 5rem 10rem;
+  color: var(--blue);
+  font-size: 1.3rem;
+}
+.Recipe p {
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  text-align: justify;
+}
+.Recipe__heading,
+.Recipe__subheading {
+  font-family: "Cookie", "Poppins", sans-serif;
+  font-weight: 600;
+  color: var(--brown);
+  padding-bottom: 0.5rem;
+}
+.Recipe__heading {
+  font-size: 3.5rem;
+}
+.Recipe__subheading {
+  font-size: 2.5rem;
+}
+.Recipe__ingredients {
+  padding-left: 3rem;
+  padding-bottom: 2rem;
+  list-style: none;
+}
+.Recipe__ingredients li::before {
+  content: "🥄";
+}

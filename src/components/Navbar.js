@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "./styles/Navbar.css";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   return (
@@ -10,6 +11,7 @@ const Navbar = () => {
       <NavLink className="btn" to="create">
         Create Recipe
       </NavLink>
+      <SearchBar />
     </nav>
   );
 };

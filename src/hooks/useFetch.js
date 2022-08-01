@@ -22,7 +22,10 @@ const useFetch = (url, method = "GET") => {
     const fetchData = async (fetchOptions) => {
       try {
         setIsPending(true);
-        const response = await fetch(url, { signal: controller.signal });
+        const response = await fetch(url, {
+          ...fetchOptions,
+          signal: controller.signal,
+        });
         if (!response.ok) throw new Error(response.statusText);
         const json = await response.json();
         setData(json);
@@ -46,7 +49,7 @@ const useFetch = (url, method = "GET") => {
     }
 
     return () => controller.abort();
-  }, [url]);
+  }, [url, options, method]);
 
   return { data, isPending, error, postData };
 };

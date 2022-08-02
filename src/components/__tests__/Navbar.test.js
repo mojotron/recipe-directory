@@ -1,11 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter, Router } from "react-router-dom";
+import { ThemeProvider } from "../../context/ThemeContext";
 import Navbar from "../Navbar";
 
 const MockNavbar = () => {
   return (
     <BrowserRouter>
-      <Navbar />
+      <ThemeProvider value={{ color: "blue" }}>
+        <Navbar />
+      </ThemeProvider>
     </BrowserRouter>
   );
 };

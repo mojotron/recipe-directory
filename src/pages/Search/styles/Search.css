@@ -1,0 +1,13 @@
+.Search {
+  padding: 2rem 5rem 5rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.Search__heading {
+  margin-bottom: 3rem;
+  color: var(--blue);
+  font-size: 1.8rem;
+}

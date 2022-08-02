@@ -8,3 +8,10 @@ Goal of this project is practice and learn React, React Router, Testing Library 
 - using react router v6
 - Tests, unit and integration.
 - Custom styling.
+
+### What have I learned
+
+- better understanding of fetch
+- URLSearchParams
+- how to make custom hook
+- createContext, provider, consumer, useContext hook

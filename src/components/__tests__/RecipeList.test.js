@@ -27,4 +27,12 @@ describe("RecipeList component", () => {
     expect(linkElements[1]).toHaveAttribute("href", "/recipes/2");
     expect(linkElements[2]).toHaveAttribute("href", "/recipes/3");
   });
+  test("search with no matching recipes", () => {
+    render(
+      <MemoryRouter>
+        <RecipeList recipes={[]} />
+      </MemoryRouter>
+    );
+    expect(screen.getByText("No recipes found!")).toBeInTheDocument();
+  });
 });

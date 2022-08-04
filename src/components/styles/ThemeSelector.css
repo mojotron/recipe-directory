@@ -1,0 +1,17 @@
+.ThemeSelector {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 5rem;
+}
+.ThemeSelector__btn {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid #888;
+  cursor: pointer;
+  opacity: 0.5;
+  margin-left: 0.3rem;
+}
+.ThemeSelector__btn:hover {
+  opacity: 1;
+}

@@ -7,12 +7,14 @@ import Recipe from "./pages/Recipe/Recipe";
 import Search from "./pages/Search/Search";
 // components
 import Navbar from "./components/Navbar";
+import ThemeSelector from "./components/ThemeSelector";
 
 const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
+        <ThemeSelector />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<Create />} />

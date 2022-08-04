@@ -9,6 +9,8 @@ html {
   --blue: #1d3c45;
   --brown: #d2601a;
   --white: #fff1e1;
+  --green: #a5f79b;
+  --yellow: rgb(251, 253, 132);
 }
 *,
 *::after,

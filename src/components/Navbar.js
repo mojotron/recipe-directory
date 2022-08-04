@@ -5,7 +5,6 @@ import { useTheme } from "../hooks/useTheme";
 
 const Navbar = () => {
   const { color } = useTheme();
-
   return (
     <nav className="Navbar" style={{ backgroundColor: color }}>
       <NavLink to="/">

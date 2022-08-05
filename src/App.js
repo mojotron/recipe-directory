@@ -8,10 +8,13 @@ import Search from "./pages/Search/Search";
 // components
 import Navbar from "./components/Navbar";
 import ThemeSelector from "./components/ThemeSelector";
+import { useTheme } from "./hooks/useTheme";
 
 const App = () => {
+  const { mode } = useTheme();
+
   return (
-    <div className="App">
+    <div className={`App ${mode}`}>
       <BrowserRouter>
         <Navbar />
         <ThemeSelector />

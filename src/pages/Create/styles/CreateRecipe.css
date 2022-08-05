@@ -19,7 +19,6 @@
   flex-direction: column;
 }
 .CreateRecipe__form label {
-  color: var(--blue);
   font-size: 1.6rem;
 }
 .CreateRecipe__form input,

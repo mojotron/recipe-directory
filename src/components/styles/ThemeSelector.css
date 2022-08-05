@@ -1,7 +1,11 @@
 .ThemeSelector {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   padding: 0.5rem 5rem;
+}
+.ThemeSelector__mode img {
+  height: 3.3rem;
 }
 .ThemeSelector__btn {
   width: 2rem;

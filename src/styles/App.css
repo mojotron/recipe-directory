@@ -1,4 +1,4 @@
 .App {
-  height: inherit;
+  min-height: 100vh;
   width: inherit;
 }

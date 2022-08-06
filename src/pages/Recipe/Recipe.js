@@ -1,12 +1,34 @@
 import { useParams } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+// import useFetch from "../../hooks/useFetch";
 import "./styles/Recipe.css";
+import { getSingleRecipe } from "../../firebase/config";
+import { useState, useEffect } from "react";
 
 const Recipe = () => {
   const { id } = useParams();
-  const { data, isPending, error } = useFetch(
-    `http://localhost:3000/recipes/${id}`
-  );
+  const [data, setData] = useState(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
+  // const { data, isPending, error } = useFetch(
+  //   `http://localhost:3000/recipes/${id}`
+  // );
+
+  useEffect(() => {
+    setIsPending(true);
+    const loadRecipe = async () => {
+      try {
+        const recipe = await getSingleRecipe(id);
+        setIsPending(false);
+        setData(recipe);
+        setError(null);
+      } catch (error) {
+        setIsPending(false);
+        setError(error);
+      }
+    };
+
+    loadRecipe();
+  }, [id]);
 
   return (
     <div className="Recipe">

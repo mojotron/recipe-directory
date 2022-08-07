@@ -5,7 +5,9 @@ import {
   getFirestore,
   doc,
   getDoc,
-} from "firebase/firestore/lite";
+  addDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDeg1cEdHHkTUGMDS5wDTPMrNqYzTyZXFQ",
@@ -17,7 +19,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 export const getRecipes = async () => {
   try {
@@ -39,6 +41,23 @@ export const getSingleRecipe = async (id) => {
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) throw new Error("No such recipe");
     return docSnap.data();
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const addRecipe = async (recipeData) => {
+  try {
+    const docRef = await addDoc(collection(db, "recipes"), { ...recipeData });
+    console.log(docRef.id);
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteRecipe = async (id) => {
+  try {
+    await deleteDoc(doc(db, "recipes", id));
   } catch (error) {
     throw error;
   }

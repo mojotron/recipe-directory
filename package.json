@@ -39,7 +39,6 @@
     ]
   },
   "devDependencies": {
-    "json-server": "^0.17.0",
     "msw": "^0.44.2"
   }
 }

@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import "./styles/CreateRecipe.css";
-import useFetch from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import { addRecipe } from "../../firebase/config";
 
 const CreateRecipe = () => {
   const [formData, setFormData] = useState({
@@ -9,10 +9,6 @@ const CreateRecipe = () => {
     cookingTime: "",
     method: "",
   });
-  const { postData, data, isPending, error } = useFetch(
-    "http://localhost:3000/recipes",
-    "POST"
-  );
 
   const [currentIngredient, setCurrentIngredient] = useState("");
   const [ingredients, setIngredients] = useState([]);
@@ -20,19 +16,20 @@ const CreateRecipe = () => {
   const ingredientInput = useRef(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    postData({
+    const recipeData = {
       ...formData,
       ingredients,
       cookingTime: formData.cookingTime + " minutes",
-    });
+    };
+    try {
+      await addRecipe(recipeData);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  useEffect(() => {
-    if (data === null) return;
-    navigate("/");
-  }, [data, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

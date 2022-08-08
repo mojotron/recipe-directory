@@ -39,10 +39,4 @@
   list-style: none;
   padding-bottom: 1rem;
 }
-.Form__list__ingredients li {
-  padding: 0.5rem 1rem;
-  color: var(--blue);
-  font-size: 1.6rem;
-  font-family: "Poppins", sans-serif;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
+

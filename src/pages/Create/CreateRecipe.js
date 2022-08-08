@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import "./styles/CreateRecipe.css";
 import { useNavigate } from "react-router-dom";
 import { addRecipe } from "../../firebase/config";
+import Ingredient from "./Ingredient";
 
 const CreateRecipe = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ const CreateRecipe = () => {
 
   const [currentIngredient, setCurrentIngredient] = useState("");
   const [ingredients, setIngredients] = useState([]);
+
+  console.log(ingredients);
 
   const ingredientInput = useRef(null);
   const navigate = useNavigate();
@@ -48,6 +51,21 @@ const CreateRecipe = () => {
     setIngredients((oldIngs) => [...oldIngs, currentIngredient]);
     setCurrentIngredient("");
     ingredientInput.current.focus();
+  };
+
+  const handleDeleteIng = (value) => {
+    setIngredients((oldIngs) => {
+      return oldIngs.filter((ing) => ing !== value);
+    });
+  };
+
+  const handleUpdateIng = (value, newValue) => {
+    setIngredients((oldIngs) => {
+      return oldIngs.map((ing) => {
+        if (ing === value) return newValue;
+        else return ing;
+      });
+    });
   };
 
   return (
@@ -94,20 +112,33 @@ const CreateRecipe = () => {
           </div>
           <ul className="Form__list__ingredients">
             {ingredients.map((ing) => (
-              <li key={ing}>{ing}</li>
+              <Ingredient
+                key={ing}
+                value={ing}
+                handleDeleteIng={handleDeleteIng}
+                handleUpdateIng={handleUpdateIng}
+              />
             ))}
           </ul>
         </div>
 
-        <label htmlFor="cooking-method">Describe cooking method</label>
-        <textarea
-          id="cooking-method"
-          name="method"
-          value={formData.method}
-          onChange={handleChange}
-          required
-          spellCheck
-        />
+        <div className="CreateRecipe__form__method">
+          <div className="Form__add__method">
+            <label htmlFor="cooking-method">Describe cooking method</label>
+            <textarea
+              id="cooking-method"
+              name="method"
+              value={formData.method}
+              onChange={handleChange}
+              required
+              spellCheck
+            />
+            <button className="btn" type="button">
+              Add
+            </button>
+          </div>
+          <ul></ul>
+        </div>
 
         <button className="btn" type="submit">
           Create

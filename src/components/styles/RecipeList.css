@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 .RecipeList__item__heading {
   font-family: "Cookie", "Poppins", sans-serif;

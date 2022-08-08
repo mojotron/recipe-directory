@@ -1,0 +1,17 @@
+.Ingredient {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--white);
+  color: var(--brown);
+  font-size: 1.6rem;
+  font-family: "Poppins", sans-serif;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.Ingredient__control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 0 2rem;
+}

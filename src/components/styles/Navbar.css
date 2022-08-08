@@ -13,3 +13,11 @@
   font-family: "Cookie", "Poppins", sans-serif;
   font-size: 3rem;
 }
+
+@media only screen and (max-width: 600px) {
+  .Navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+}

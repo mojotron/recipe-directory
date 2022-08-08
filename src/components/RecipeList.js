@@ -20,7 +20,7 @@ const RecipeList = ({ recipes }) => {
     <div className="RecipeList">
       {recipes.map((recipe) => (
         <div className="RecipeList__item" key={recipe.id}>
-          <button onClick={() => handleClick(recipe.id)}>
+          <button className="btn--icon" onClick={() => handleClick(recipe.id)}>
             <img src={trashBin} alt="trash bin" />
           </button>
           <h3 className="RecipeList__item__heading">{recipe.title}</h3>

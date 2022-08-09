@@ -36,7 +36,9 @@ const Recipe = () => {
       {error && <p>{error}</p>}
       {data && (
         <>
-          <h2 className="Recipe__heading">{data.title}</h2>
+          <h2 className="Recipe__heading">
+            {data.title} ({data.mealType})
+          </h2>
           <p className="Recipe__time">Cooking time {data.cookingTime}</p>
           <h3 className="Recipe__subheading">Ingredients:</h3>
           <ul className="Recipe__ingredients">
@@ -45,7 +47,11 @@ const Recipe = () => {
             ))}
           </ul>
           <h3 className="Recipe__subheading">Method:</h3>
-          <p>{data.method}</p>
+          <ul className="Recipe__methods">
+            {data.methods.map((met, i) => (
+              <li key={i}>{met}</li>
+            ))}
+          </ul>
         </>
       )}
     </div>

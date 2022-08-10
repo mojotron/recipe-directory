@@ -1,17 +1,16 @@
-import { useParams } from "react-router-dom";
-// import useFetch from "../../hooks/useFetch";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import "./styles/Recipe.css";
-import { getSingleRecipe } from "../../firebase/config";
+import { getSingleRecipe, deleteRecipe } from "../../firebase/config";
 import { useState, useEffect } from "react";
+import deleteIcon from "../../assets/delete.svg";
+import editIcon from "../../assets/edit.svg";
 
 const Recipe = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
-  // const { data, isPending, error } = useFetch(
-  //   `http://localhost:3000/recipes/${id}`
-  // );
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsPending(true);
@@ -30,12 +29,36 @@ const Recipe = () => {
     loadRecipe();
   }, [id]);
 
+  const handleDeleteClick = async () => {
+    try {
+      await deleteRecipe(id);
+      navigate("/");
+      setError(null);
+    } catch (error) {
+      setError("Could not delete recipe");
+    }
+  };
+
   return (
     <div className="Recipe">
       {isPending && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {data && (
         <>
+          <div className="Recipe__controls">
+            <button
+              type="button"
+              className="btn--icon"
+              onClick={handleDeleteClick}
+            >
+              <img src={deleteIcon} alt="delete" />
+            </button>
+            <Link to="/create" state={{ id, ...data }}>
+              <button type="button" className="btn--icon" onClick={() => {}}>
+                <img src={editIcon} alt="edit" />
+              </button>
+            </Link>
+          </div>
           <h2 className="Recipe__heading">
             {data.title} ({data.mealType})
           </h2>

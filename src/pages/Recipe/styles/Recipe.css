@@ -1,6 +1,8 @@
 .Recipe {
+  max-width: 65rem;
   padding: 5rem 10rem;
   font-size: 1.3rem;
+  margin: 0 auto;
 }
 .Recipe p {
   padding-left: 1rem;
@@ -27,4 +29,7 @@
 }
 .Recipe__ingredients li::before {
   content: "🥄";
+}
+.Recipe__controls {
+  float: right;
 }

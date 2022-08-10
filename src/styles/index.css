@@ -42,7 +42,6 @@ a:hover {
   align-items: center;
   margin: 0 auto;
 }
-
 .btn {
   background-color: var(--white);
   border-radius: 0.3rem;
@@ -66,17 +65,14 @@ a:hover {
   vertical-align: baseline;
   white-space: nowrap;
 }
-
 .btn:hover,
 .btn:focus {
-  background-color: var(--blue);
+  background-color: var(--brown);
   color: var(--white);
 }
-
 .btn:focus {
   box-shadow: 0 0 0 4px var(--white);
 }
-
 .btn:active {
   background-color: var(--brown);
   box-shadow: none;
@@ -89,7 +85,9 @@ a:hover {
   background-color: var(--blue);
   color: var(--white);
 }
-
+.dark .btn {
+  border-color: var(--brown);
+}
 .btn--icon {
   border: none;
   background: none;

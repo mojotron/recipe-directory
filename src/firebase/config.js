@@ -7,6 +7,7 @@ import {
   getDoc,
   addDoc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -58,6 +59,15 @@ export const addRecipe = async (recipeData) => {
 export const deleteRecipe = async (id) => {
   try {
     await deleteDoc(doc(db, "recipes", id));
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateRecipe = async (id, data) => {
+  try {
+    const docRef = doc(db, "recipes", id);
+    await updateDoc(docRef, { ...data });
   } catch (error) {
     throw error;
   }

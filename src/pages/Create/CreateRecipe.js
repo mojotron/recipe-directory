@@ -1,14 +1,14 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./styles/CreateRecipe.css";
-import { useNavigate } from "react-router-dom";
-import { addRecipe } from "../../firebase/config";
+import { useNavigate, useLocation } from "react-router-dom";
+import { addRecipe, updateRecipe } from "../../firebase/config";
 import ListItem from "./ListItem";
 
 const CreateRecipe = () => {
   const [formData, setFormData] = useState({
     title: "",
     cookingTime: "",
-    mealType: "breakfast",
+    mealType: "any",
   });
 
   const [currentIngredient, setCurrentIngredient] = useState("");
@@ -21,6 +21,20 @@ const CreateRecipe = () => {
   const methodInput = useRef(null);
 
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  // get data from location if user wants update existing recipe
+  useEffect(() => {
+    if (location.state === null) return;
+    setFormData({
+      title: location.state.title,
+      cookingTime: Number.parseInt(location.state.cookingTime),
+      mealType: location.state.mealType,
+    });
+    setIngredients([...location.state.ingredients]);
+    setMethods([...location.state.methods]);
+  }, [location]);
   // submit finished recipe to the server
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,8 +45,14 @@ const CreateRecipe = () => {
       cookingTime: formData.cookingTime + " minutes",
     };
     try {
-      await addRecipe(recipeData);
-      navigate("/");
+      // TODO update recipe
+      if (location.state) {
+        await updateRecipe(location.state.id, recipeData);
+        navigate(`/recipes/${location.state.id}`);
+      } else {
+        await addRecipe(recipeData);
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -95,7 +115,9 @@ const CreateRecipe = () => {
 
   return (
     <div className="CreateRecipe">
-      <h2 className="CreateRecipe__heading">Create New Recipe</h2>
+      <h2 className="CreateRecipe__heading">
+        {location.state ? "Update" : "Create New"} Recipe
+      </h2>
       <form
         className="CreateRecipe__form"
         aria-label="form"
@@ -118,6 +140,7 @@ const CreateRecipe = () => {
           onChange={handleChange}
           name="mealType"
         >
+          <option value="any">Any</option>
           <option value="breakfast">Breakfast</option>
           <option value="lunch">Lunch</option>
           <option value="dinner">Dinner</option>
@@ -136,8 +159,8 @@ const CreateRecipe = () => {
         />
 
         <div className="CreateRecipe__form__ingredients">
+          <label htmlFor="ingredients">Ingredients</label>
           <div className="Form__add__ingredients">
-            <label htmlFor="ingredients">Ingredients</label>
             <input
               id="ingredients"
               type="text"
@@ -164,8 +187,8 @@ const CreateRecipe = () => {
         </div>
 
         <div className="CreateRecipe__form__method">
+          <label htmlFor="cooking-method">Describe cooking method</label>
           <div className="Form__add__method">
-            <label htmlFor="cooking-method">Describe cooking method</label>
             <textarea
               id="cooking-method"
               name="method"
@@ -178,7 +201,7 @@ const CreateRecipe = () => {
               Add
             </button>
           </div>
-          <ul>
+          <ul className="Form__list__methods">
             {methods.map((method, i) => (
               <ListItem
                 key={i}
@@ -192,8 +215,8 @@ const CreateRecipe = () => {
           </ul>
         </div>
 
-        <button className="btn" type="submit">
-          Create
+        <button className="CreateRecipe__form--btn btn" type="submit">
+          {location.state ? "Update" : "Create"}
         </button>
       </form>
     </div>

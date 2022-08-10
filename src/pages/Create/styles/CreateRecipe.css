@@ -22,15 +22,22 @@
   font-size: 1.6rem;
 }
 .CreateRecipe__form input,
-.CreateRecipe__form textarea {
+.CreateRecipe__form textarea,
+.CreateRecipe__form select {
+  border-radius: 0.3rem;
+  border: 0.1px solid #888;
   margin-bottom: 1rem;
   padding: 0.5rem 2rem;
   font-family: inherit;
   color: var(--blue);
+  max-width: 60rem;
 }
-.Form__add__ingredients {
-  display: flex;
-  justify-content: flex-start;
+.Form__add__ingredients,
+.Form__add__method {
+  display: grid;
+  grid-template-columns: 8fr 2fr;
+  grid-template-rows: 1fr;
+  max-width: 60rem;
   align-items: baseline;
 }
 .Form__list__ingredients {
@@ -39,4 +46,6 @@
   list-style: none;
   padding-bottom: 1rem;
 }
-
+.CreateRecipe__form--btn {
+  margin-top: 2rem;
+}

@@ -22,10 +22,17 @@
 .Recipe__subheading {
   font-size: 2.5rem;
 }
-.Recipe__ingredients {
+.Recipe__ingredients,
+.Recipe__methods {
   padding-left: 3rem;
   padding-bottom: 2rem;
+}
+.Recipe__ingredients {
   list-style: none;
+}
+.Recipe__methods li {
+  margin-bottom: 0.3rem;
+  text-align: justify;
 }
 .Recipe__ingredients li::before {
   content: "🥄";

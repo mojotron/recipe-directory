@@ -70,11 +70,11 @@ const Recipe = () => {
             ))}
           </ul>
           <h3 className="Recipe__subheading">Method:</h3>
-          <ul className="Recipe__methods">
+          <ol className="Recipe__methods">
             {data.methods.map((met, i) => (
               <li key={i}>{met}</li>
             ))}
-          </ul>
+          </ol>
         </>
       )}
     </div>

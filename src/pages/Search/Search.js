@@ -1,16 +1,33 @@
 import { useLocation } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
 import "./styles/Search.css";
 import RecipeList from "../../components/RecipeList";
+import { searchRecipes } from "../../firebase/config";
+import { useEffect, useState } from "react";
 
 const Search = () => {
   const queryString = useLocation().search;
   const searchParams = new URLSearchParams(queryString);
-  const target = searchParams.get("q");
+  const target = searchParams.get("q").toLowerCase();
+  const [data, setData] = useState(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
 
-  const { data, isPending, error } = useFetch(
-    `http://localhost:3000/recipes?q=${target}`
-  );
+  useEffect(() => {
+    const loadData = async () => {
+      setIsPending(true);
+      try {
+        const results = await searchRecipes(target);
+        setIsPending(false);
+        setData(results);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+        setIsPending(false);
+      }
+    };
+
+    loadData();
+  }, [target]);
 
   return (
     <div className="Search">

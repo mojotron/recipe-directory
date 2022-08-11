@@ -72,3 +72,24 @@ export const updateRecipe = async (id, data) => {
     throw error;
   }
 };
+
+export const searchRecipes = async (searchQuery) => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "recipes"));
+    const results = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      if (
+        data.title.toLowerCase().includes(searchQuery) ||
+        data.cookingTime.toLowerCase().includes(searchQuery) ||
+        data.mealType.toLowerCase() === searchQuery ||
+        data.ingredients.some((ele) => ele.includes(searchQuery)) ||
+        data.methods.some((ele) => ele.includes(searchQuery))
+      )
+        results.push({ id: doc.id, ...doc.data() });
+    });
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};

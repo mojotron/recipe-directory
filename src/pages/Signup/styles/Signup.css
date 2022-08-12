@@ -1,0 +1,16 @@
+.Signup {
+  display: flex;
+  flex-direction: column;
+  width: 35rem;
+  margin: 0 auto;
+  padding-top: 5rem;
+}
+.Signup label {
+  margin-bottom: 0.5rem;
+}
+.Signup input {
+  margin-bottom: 1rem;
+}
+.Signup .btn {
+  margin-top: 1rem;
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { auth } from "../firebase/config";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export const useSignup = () => {
   const [isPending, setIsPending] = useState(false);
@@ -10,9 +10,10 @@ export const useSignup = () => {
     setError(null);
     setIsPending(true);
     try {
-      const res = await signInWithEmailAndPassword(auth, email, password);
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(res);
       if (!res) throw new Error("Could not create user account!");
-      // auth.currentUser.displayName = username;
+      auth.currentUser.displayName = username;
       setError(null);
       setIsPending(false);
     } catch (error) {

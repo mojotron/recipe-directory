@@ -6,6 +6,7 @@ import Create from "./pages/Create/CreateRecipe";
 import Recipe from "./pages/Recipe/Recipe";
 import Search from "./pages/Search/Search";
 import Signup from "./pages/Signup/Signup";
+import Login from "./pages/Login/Login";
 // components
 import Navbar from "./components/Navbar";
 import ThemeSelector from "./components/ThemeSelector";
@@ -22,6 +23,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/create" element={<Create />} />
           <Route path="/recipes/:id" element={<Recipe />} />
           <Route path="/search" element={<Search />} />

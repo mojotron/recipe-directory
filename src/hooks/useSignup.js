@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
@@ -16,7 +16,7 @@ export const useSignup = () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       if (!res) throw new Error("Could not create user account!");
-      res.user.displayName = username;
+      await updateProfile(res.user, { displayName: username });
       dispatch({ type: "LOGIN", payload: res.user });
       if (!isCancelled) {
         setError(null);

@@ -3,6 +3,8 @@ import "./styles/CreateRecipe.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { addRecipe, updateRecipe } from "../../firebase/config";
 import ListItem from "./ListItem";
+import { useFirebase } from "../../hooks/useFirestore";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const CreateRecipe = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +26,10 @@ const CreateRecipe = () => {
 
   const location = useLocation();
 
+  const { addDocument, response } = useFirebase("recipes");
+
+  const { user } = useAuthContext();
+
   // get data from location if user wants update existing recipe
   useEffect(() => {
     if (location.state === null) return;
@@ -43,6 +49,7 @@ const CreateRecipe = () => {
       ingredients,
       methods,
       cookingTime: formData.cookingTime + " minutes",
+      uid: user.uid,
     };
     try {
       // TODO update recipe
@@ -50,7 +57,8 @@ const CreateRecipe = () => {
         await updateRecipe(location.state.id, recipeData);
         navigate(`/recipes/${location.state.id}`);
       } else {
-        await addRecipe(recipeData);
+        console.log("yo");
+        await addDocument(recipeData);
         navigate("/");
       }
     } catch (error) {

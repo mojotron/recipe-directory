@@ -3,10 +3,13 @@ import "./styles/Navbar.css";
 import SearchBar from "./SearchBar";
 import { useTheme } from "../hooks/useTheme";
 import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Navbar = () => {
   const { color } = useTheme();
-  const { isPending, logout } = useLogout();
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+
   return (
     <nav className="Navbar" style={{ backgroundColor: color }}>
       <NavLink to="/">
@@ -16,18 +19,24 @@ const Navbar = () => {
         Create Recipe
       </NavLink>
       <SearchBar />
-      <NavLink className="btn" to="signup">
-        Signup
-      </NavLink>
+      {!user && (
+        <>
+          <NavLink className="btn" to="login">
+            Login
+          </NavLink>
+          <NavLink className="btn" to="signup">
+            Signup
+          </NavLink>
+        </>
+      )}
 
-      {isPending ? (
-        <button className="btn" disabled>
-          Loading
-        </button>
-      ) : (
-        <button className="btn" onClick={logout}>
-          Logout
-        </button>
+      {user && (
+        <>
+          <span>hello, {user.displayName}</span>
+          <button className="btn" onClick={logout}>
+            Logout
+          </button>
+        </>
       )}
     </nav>
   );

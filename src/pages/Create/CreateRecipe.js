@@ -3,7 +3,7 @@ import "./styles/CreateRecipe.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { addRecipe, updateRecipe } from "../../firebase/config";
 import ListItem from "./ListItem";
-import { useFirebase } from "../../hooks/useFirestore";
+import { useFirestore } from "../../hooks/useFirestore";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const CreateRecipe = () => {
@@ -26,7 +26,7 @@ const CreateRecipe = () => {
 
   const location = useLocation();
 
-  const { addDocument, response } = useFirebase("recipes");
+  const { addDocument, response } = useFirestore("recipes");
 
   const { user } = useAuthContext();
 

@@ -1,6 +1,13 @@
 import { useState, useEffect, useReducer } from "react";
 import { db } from "../firebase/config";
-import { addDoc, collection, Timestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  Timestamp,
+} from "firebase/firestore";
 
 const initialState = {
   document: null,
@@ -20,6 +27,20 @@ const firestoreReducer = (state, action) => {
         error: null,
         success: true,
       };
+    case "DELETE_DOCUMENT":
+      return {
+        document: null,
+        isPending: false,
+        error: null,
+        success: true,
+      };
+    case "GET_DOCUMENT":
+      return {
+        document: action.payload,
+        isPending: false,
+        error: null,
+        success: true,
+      };
     case "ERROR":
       return {
         document: null,
@@ -32,7 +53,7 @@ const firestoreReducer = (state, action) => {
   }
 };
 
-export const useFirebase = (collectionName) => {
+export const useFirestore = (collectionName) => {
   const [response, dispatch] = useReducer(firestoreReducer, initialState);
   const [isCancelled, setIsCancelled] = useState(false);
 
@@ -55,11 +76,33 @@ export const useFirebase = (collectionName) => {
     }
   };
 
-  const deleteDocument = async (id) => {};
+  const deleteDocument = async (id) => {
+    dispatch({ type: "IS_PENDING" });
+    try {
+      await deleteDoc(doc(db, collectionName, id));
+      dispatchIfNotCancelled({ type: "DELETE_DOCUMENT" });
+    } catch (error) {
+      dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
+    }
+  };
+
+  const getDocument = async (id) => {
+    dispatch({ type: "IS_PENDING" });
+    try {
+      const docRef = doc(db, collectionName, id);
+      const docSnapshot = await getDoc(docRef);
+      dispatchIfNotCancelled({
+        type: "GET_DOCUMENT",
+        payload: { ...docSnapshot.data(), id: doc.id },
+      });
+    } catch (error) {
+      dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
+    }
+  };
 
   useEffect(() => {
     return () => setIsCancelled(true);
   }, []);
 
-  return { response, addDocument, deleteDocument };
+  return { response, addDocument, deleteDocument, getDocument };
 };

@@ -1,0 +1,16 @@
+.Login {
+  display: flex;
+  flex-direction: column;
+  width: 35rem;
+  margin: 0 auto;
+  padding-top: 5rem;
+}
+.Login label {
+  margin-bottom: 0.5rem;
+}
+.Login input {
+  margin-bottom: 1rem;
+}
+.Login .btn {
+  margin-top: 1rem;
+}

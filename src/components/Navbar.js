@@ -15,24 +15,25 @@ const Navbar = () => {
       <NavLink to="/">
         <h1 className="Navbar__heading">Recipes Directory</h1>
       </NavLink>
-      <NavLink className="btn" to="create">
-        Create Recipe
-      </NavLink>
-      <SearchBar />
+
+      {user && <SearchBar />}
       {!user && (
-        <>
+        <div>
           <NavLink className="btn" to="login">
             Login
           </NavLink>
           <NavLink className="btn" to="signup">
             Signup
           </NavLink>
-        </>
+        </div>
       )}
 
       {user && (
         <>
           <span>hello, {user.displayName}</span>
+          <NavLink className="btn" to="create">
+            Create Recipe
+          </NavLink>
           <button className="btn" onClick={logout}>
             Logout
           </button>

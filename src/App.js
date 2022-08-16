@@ -50,9 +50,30 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="/create" element={<Create />} />
-            <Route path="/recipes/:id" element={<Recipe />} />
-            <Route path="/search" element={<Search />} />
+            <Route
+              path="/create"
+              element={
+                <ProtectedRoute condition={!user} goto="/login">
+                  <Create />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/recipes/:id"
+              element={
+                <ProtectedRoute condition={!user} goto="/login">
+                  <Recipe />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <ProtectedRoute condition={!user} goto="/login">
+                  <Search />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<h1>404 Page not found</h1>} />
           </Routes>
         </BrowserRouter>

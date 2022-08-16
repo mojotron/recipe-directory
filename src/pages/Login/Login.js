@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
+import "./styles/Login.css";
 
 const Login = () => {
   const [formDate, setFormData] = useState({ email: "", password: "" });
@@ -14,7 +15,7 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="Login" onSubmit={handleSubmit}>
       <h2>Login</h2>
 
       <label htmlFor="email">Email</label>

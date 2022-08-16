@@ -1,9 +1,10 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "./styles/Recipe.css";
-import { getSingleRecipe, deleteRecipe } from "../../firebase/config";
+import { getSingleRecipe } from "../../firebase/config";
 import { useState, useEffect } from "react";
 import deleteIcon from "../../assets/delete.svg";
 import editIcon from "../../assets/edit.svg";
+import { useFirestore } from "../../hooks/useFirestore";
 
 const Recipe = () => {
   const { id } = useParams();
@@ -11,6 +12,7 @@ const Recipe = () => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { getDocument, deleteDocument } = useFirestore("recipes");
 
   useEffect(() => {
     setIsPending(true);
@@ -31,7 +33,7 @@ const Recipe = () => {
 
   const handleDeleteClick = async () => {
     try {
-      await deleteRecipe(id);
+      await deleteDocument(id);
       navigate("/");
       setError(null);
     } catch (error) {

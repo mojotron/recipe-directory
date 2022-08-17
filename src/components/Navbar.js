@@ -30,7 +30,7 @@ const Navbar = () => {
 
       {user && (
         <>
-          <span>hello, {user.displayName}</span>
+          <span className="Navbar__username">hello, {user.displayName}</span>
           <NavLink className="btn" to="create">
             Create Recipe
           </NavLink>

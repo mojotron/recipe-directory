@@ -1,51 +1,35 @@
+import { useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+// style
 import "./styles/Recipe.css";
-import { getSingleRecipe } from "../../firebase/config";
-import { useState, useEffect } from "react";
+// hooks
+import { useFirestore } from "../../hooks/useFirestore";
+// icon images
 import deleteIcon from "../../assets/delete.svg";
 import editIcon from "../../assets/edit.svg";
-import { useFirestore } from "../../hooks/useFirestore";
 
+// TODO only author can delete update recipe 
 const Recipe = () => {
   const { id } = useParams();
-  const [data, setData] = useState(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { getDocument, deleteDocument } = useFirestore("recipes");
+  const { getDocument, deleteDocument, response } = useFirestore("recipes");
+
+  console.log("response", response)
 
   useEffect(() => {
-    setIsPending(true);
-    const loadRecipe = async () => {
-      try {
-        const recipe = await getSingleRecipe(id);
-        setIsPending(false);
-        setData(recipe);
-        setError(null);
-      } catch (error) {
-        setIsPending(false);
-        setError(error);
-      }
-    };
-
-    loadRecipe();
-  }, [id]);
+    getDocument(id);
+  }, []);
 
   const handleDeleteClick = async () => {
-    try {
-      await deleteDocument(id);
-      navigate("/");
-      setError(null);
-    } catch (error) {
-      setError("Could not delete recipe");
-    }
+    await deleteDocument(id);
+    navigate("/");
   };
 
   return (
     <div className="Recipe">
-      {isPending && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      {data && (
+      {response.isPending && <p>Loading...</p>}
+      {response.error && <p>{response.error}</p>}
+      {response.document && (
         <>
           <div className="Recipe__controls">
             <button
@@ -55,25 +39,25 @@ const Recipe = () => {
             >
               <img src={deleteIcon} alt="delete" />
             </button>
-            <Link to="/create" state={{ id, ...data }}>
-              <button type="button" className="btn--icon" onClick={() => {}}>
+            <Link to="/create" state={{ id, ...response.document }}>
+              <button type="button" className="btn--icon">
                 <img src={editIcon} alt="edit" />
               </button>
             </Link>
           </div>
           <h2 className="Recipe__heading">
-            {data.title} ({data.mealType})
+            {response.document.title} ({response.document.mealType})
           </h2>
-          <p className="Recipe__time">Cooking time {data.cookingTime}</p>
+          <p className="Recipe__time">Cooking time {response.document.cookingTime}</p>
           <h3 className="Recipe__subheading">Ingredients:</h3>
           <ul className="Recipe__ingredients">
-            {data.ingredients.map((ing) => (
+            {response.document.ingredients.map((ing) => (
               <li key={ing}>{ing}</li>
             ))}
           </ul>
           <h3 className="Recipe__subheading">Method:</h3>
           <ol className="Recipe__methods">
-            {data.methods.map((met, i) => (
+            {response.document.methods.map((met, i) => (
               <li key={i}>{met}</li>
             ))}
           </ol>

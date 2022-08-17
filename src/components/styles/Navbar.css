@@ -5,13 +5,20 @@
   align-items: center;
   border-bottom: 0.1rem solid #ccc;
 }
+
 .Navbar a.active {
   text-decoration: none;
   opacity: 0.5;
 }
+
 .Navbar__heading {
   font-family: "Cookie", "Poppins", sans-serif;
   font-size: 3rem;
+}
+
+.Navbar__username {
+  font-size: 1.6rem;
+  padding: 0 1rem;
 }
 
 @media only screen and (max-width: 600px) {

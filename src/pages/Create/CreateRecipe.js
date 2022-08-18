@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import "./styles/CreateRecipe.css";
 import { useNavigate, useLocation } from "react-router-dom";
-import { addRecipe, updateRecipe } from "../../firebase/config";
 import ListItem from "./ListItem";
 import { useFirestore } from "../../hooks/useFirestore";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const CreateRecipe = () => {
+  console.log("render CreateRecipe")
   const [formData, setFormData] = useState({
     title: "",
     cookingTime: "",
@@ -23,24 +23,22 @@ const CreateRecipe = () => {
   const methodInput = useRef(null);
 
   const navigate = useNavigate();
-
   const location = useLocation();
-
-  const { addDocument, response } = useFirestore("recipes");
-
   const { user } = useAuthContext();
+  const { addDocument, updateDocument } = useFirestore("recipes");
 
   // get data from location if user wants update existing recipe
   useEffect(() => {
     if (location.state === null) return;
     setFormData({
-      title: location.state.title,
-      cookingTime: Number.parseInt(location.state.cookingTime),
-      mealType: location.state.mealType,
+      title: location.state.data.title,
+      cookingTime: Number.parseInt(location.state.data.cookingTime),
+      mealType: location.state.data.mealType,
     });
-    setIngredients([...location.state.ingredients]);
-    setMethods([...location.state.methods]);
+    setIngredients([...location.state.data.ingredients]);
+    setMethods([...location.state.data.methods]);
   }, [location]);
+
   // submit finished recipe to the server
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,16 +47,16 @@ const CreateRecipe = () => {
       ingredients,
       methods,
       cookingTime: formData.cookingTime + " minutes",
-      uid: user.uid,
     };
+
     try {
       // TODO update recipe
       if (location.state) {
-        await updateRecipe(location.state.id, recipeData);
-        navigate(`/recipes/${location.state.id}`);
+        console.log('>>>', location.state)
+        await updateDocument(location.state.docId, recipeData);
+        navigate(`/recipes/${location.state.docId}`);
       } else {
-        console.log("yo");
-        await addDocument(recipeData);
+        await addDocument({ ...recipeData, uid: user.uid });
         navigate("/");
       }
     } catch (error) {

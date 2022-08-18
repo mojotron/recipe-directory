@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 // style
 import "./styles/Recipe.css";
@@ -14,11 +14,13 @@ const Recipe = () => {
   const navigate = useNavigate();
   const { getDocument, deleteDocument, response } = useFirestore("recipes");
 
-  console.log("response", response)
+  const loadDocument = useRef(() => getDocument(id)).current
+
+  console.log(response)
 
   useEffect(() => {
-    getDocument(id);
-  }, []);
+    loadDocument();
+  }, [loadDocument]);
 
   const handleDeleteClick = async () => {
     await deleteDocument(id);
@@ -39,7 +41,7 @@ const Recipe = () => {
             >
               <img src={deleteIcon} alt="delete" />
             </button>
-            <Link to="/create" state={{ id, ...response.document }}>
+            <Link to="/create" state={{ docId: id, data: { ...response.document } }}>
               <button type="button" className="btn--icon">
                 <img src={editIcon} alt="edit" />
               </button>

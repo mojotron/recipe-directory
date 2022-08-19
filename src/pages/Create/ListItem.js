@@ -8,6 +8,8 @@ const ListItem = ({ value, handleDelete, handleUpdate, index, type }) => {
   const [changeValue, setChangeValue] = useState(false);
   const [newValue, setNewValue] = useState(value);
 
+  // need to check document uid and current user uid
+
   return (
     <li className="ListItem">
       {changeValue ? (
@@ -27,15 +29,16 @@ const ListItem = ({ value, handleDelete, handleUpdate, index, type }) => {
       )}
 
       <div className="ListItem__controls">
-        <button className="btn--icon" onClick={() => handleDelete(type, value)}>
+        <button type="button" className="btn--icon" onClick={() => handleDelete(type, value)}>
           <img src={deleteIcon} alt="delete" />
         </button>
         {!changeValue ? (
-          <button className="btn--icon" onClick={() => setChangeValue(true)}>
+          <button type="button" className="btn--icon" onClick={() => setChangeValue(true)}>
             <img src={editIcon} alt="edit" />
           </button>
         ) : (
           <button
+            type="button"
             className="btn--icon"
             onClick={() => {
               handleUpdate(type, value, newValue);

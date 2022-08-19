@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import "./styles/Recipe.css";
 // hooks
 import { useFirestore } from "../../hooks/useFirestore";
+import { useAuthContext } from "../../hooks/useAuthContext";
 // icon images
 import deleteIcon from "../../assets/delete.svg";
 import editIcon from "../../assets/edit.svg";
@@ -11,12 +12,11 @@ import editIcon from "../../assets/edit.svg";
 // TODO only author can delete update recipe 
 const Recipe = () => {
   const { id } = useParams();
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const { getDocument, deleteDocument, response } = useFirestore("recipes");
 
   const loadDocument = useRef(() => getDocument(id)).current
-
-  console.log(response)
 
   useEffect(() => {
     loadDocument();
@@ -33,20 +33,22 @@ const Recipe = () => {
       {response.error && <p>{response.error}</p>}
       {response.document && (
         <>
-          <div className="Recipe__controls">
-            <button
-              type="button"
-              className="btn--icon"
-              onClick={handleDeleteClick}
-            >
-              <img src={deleteIcon} alt="delete" />
-            </button>
-            <Link to="/create" state={{ docId: id, data: { ...response.document } }}>
-              <button type="button" className="btn--icon">
-                <img src={editIcon} alt="edit" />
+          {(user.uid === response.document.uid) &&
+            (<div className="Recipe__controls">
+              <button
+                type="button"
+                className="btn--icon"
+                onClick={handleDeleteClick}
+              >
+                <img src={deleteIcon} alt="delete" />
               </button>
-            </Link>
-          </div>
+              <Link to="/create" state={{ docId: id, data: { ...response.document } }}>
+                <button type="button" className="btn--icon">
+                  <img src={editIcon} alt="edit" />
+                </button>
+              </Link>
+            </div>
+            )}
           <h2 className="Recipe__heading">
             {response.document.title} ({response.document.mealType})
           </h2>

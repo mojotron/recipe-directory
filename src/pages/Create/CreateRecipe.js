@@ -6,7 +6,6 @@ import { useFirestore } from "../../hooks/useFirestore";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const CreateRecipe = () => {
-  console.log("render CreateRecipe")
   const [formData, setFormData] = useState({
     title: "",
     cookingTime: "",
@@ -52,7 +51,6 @@ const CreateRecipe = () => {
     try {
       // TODO update recipe
       if (location.state) {
-        console.log('>>>', location.state)
         await updateDocument(location.state.docId, recipeData);
         navigate(`/recipes/${location.state.docId}`);
       } else {
@@ -60,7 +58,7 @@ const CreateRecipe = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   // control form data

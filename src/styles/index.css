@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Cookie&family=Poppins:wght@100;400;600;800&display=swap");
+
 html {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 10px;
 }
+
 :root {
   --blue: #1d3c45;
   --brown: #d2601a;
@@ -12,6 +14,7 @@ html {
   --green: #a5f79b;
   --yellow: rgb(251, 253, 132);
 }
+
 *,
 *::after,
 *::before {
@@ -19,19 +22,23 @@ html {
   margin: 0;
   padding: 0;
 }
+
 body {
   min-height: 100vh;
   width: 100vw;
 }
+
 a {
   font-family: inherit;
   font-size: 1.3rem;
   color: var(--brown);
   opacity: 0.75;
 }
+
 a:hover {
   opacity: 1;
 }
+
 #root {
   background-color: var(--white);
   height: inherit;
@@ -42,6 +49,7 @@ a:hover {
   align-items: center;
   margin: 0 auto;
 }
+
 .btn {
   background-color: var(--white);
   border-radius: 0.3rem;
@@ -65,29 +73,36 @@ a:hover {
   vertical-align: baseline;
   white-space: nowrap;
 }
+
 .btn:hover,
 .btn:focus {
   background-color: var(--brown);
   color: var(--white);
 }
+
 .btn:focus {
   box-shadow: 0 0 0 4px var(--white);
 }
+
 .btn:active {
   background-color: var(--brown);
   box-shadow: none;
 }
+
 .light {
   background-color: var(--white);
   color: var(--brown);
 }
+
 .dark {
   background-color: var(--blue);
   color: var(--white);
 }
+
 .dark .btn {
   border-color: var(--brown);
 }
+
 .btn--icon {
   border: none;
   background: none;
@@ -96,10 +111,19 @@ a:hover {
   height: 1.8rem;
   width: 1.8rem;
 }
+
 .btn--icon img {
   height: inherit;
   width: inherit;
 }
+
 .btn--icon:hover {
   opacity: 1;
+}
+
+input {
+  padding: 0.5rem 2rem;
+  font-family: inherit;
+  color: var(--blue);
+  overflow: hidden;
 }

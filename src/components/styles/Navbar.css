@@ -19,6 +19,7 @@
 .Navbar__username {
   font-size: 1.6rem;
   padding: 0 1rem;
+  color: var(--brown)
 }
 
 @media only screen and (max-width: 600px) {

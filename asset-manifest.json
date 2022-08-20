@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/recipe-directory/static/css/main.55fe1c8a.css",
+    "main.js": "/recipe-directory/static/js/main.5065639a.js",
+    "index.html": "/recipe-directory/index.html",
+    "static/media/edit.svg": "/recipe-directory/static/media/edit.66254f1c53e203881335acdf819b67af.svg",
+    "static/media/toggle_off.svg": "/recipe-directory/static/media/toggle_off.4bf892b6336dfb8aa664490d5ba37fc3.svg",
+    "static/media/toggle_on.svg": "/recipe-directory/static/media/toggle_on.e93b30bae3c5ae3a6f0df18602680cb6.svg",
+    "static/media/delete.svg": "/recipe-directory/static/media/delete.41768dc7413cacd5a677b10f37495675.svg",
+    "static/media/done.svg": "/recipe-directory/static/media/done.284525ae4cceceab8a598c4bc943683f.svg",
+    "main.55fe1c8a.css.map": "/recipe-directory/static/css/main.55fe1c8a.css.map",
+    "main.5065639a.js.map": "/recipe-directory/static/js/main.5065639a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.55fe1c8a.css",
+    "static/js/main.5065639a.js"
+  ]
+}
